@@ -8,14 +8,20 @@ import java.util.*;
 
 public class ColorGridService {
 
-    public static final char[] COLORS = {'R', 'B', 'W', 'G'};
+    public static final char[] COLORS_ARRAY = {'B', 'G', 'Y', 'R', 'P', 'O'};
 
     private HashMap<Position, Node> grid;
 
     private int col;
     private int row;
 
-    public void initializeGrid(int cols, int rows) {
+    /**
+     * Method for Getting Initialized Grid
+     *
+     * @param cols
+     * @param rows
+     */
+    public void getInitializedGrid(int cols, int rows) {
         this.col = cols;
         this.row = rows;
 
@@ -24,14 +30,24 @@ public class ColorGridService {
         for (int i = 0; i < cols*rows ; i++ ) {
             int x = i % cols;
             int y = (int) Math.floor(i/cols);
-            this.grid.put(new Position(x, y), new Node(i, x, y, COLORS[random.nextInt(3)]));
+            this.grid.put(new Position(x, y), new Node(i, x, y, COLORS_ARRAY[random.nextInt(3)]));
         }
     }
 
+    /**
+     * Method for Getting Node
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public Node getNode(int x, int y) {
         return this.grid.get(new Position(x, y));
     }
 
+    /**
+     * Method for Printing a Grid
+     */
     public void printGrid() {
         for (int y = 0; y < row; y++) {
             for(int x = 0; x < col; x++) {
@@ -44,6 +60,11 @@ public class ColorGridService {
         }
     }
 
+    /**
+     * Method for Printing a Color Block
+     *
+     * @param colorBlock
+     */
     public void printColorBlock(ColorBlock colorBlock) {
         for (int y = 0; y < row; y++) {
             for(int x = 0; x < col; x++) {
@@ -80,6 +101,13 @@ public class ColorGridService {
         return nodes;
     }
 
+    /**
+     * Method for Getting Matching Block
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public ColorBlock getMatchingBlock(int x, int y) {
         Position startingPosition = new Position(x, y);
         Node startingNode = this.grid.get(startingPosition);
@@ -98,6 +126,11 @@ public class ColorGridService {
         return colorBlock;
     }
 
+    /**
+     * Method for Getting the Largest Color Block
+     *
+     * @return ColorBlock
+     */
     public ColorBlock getLargestBlock() {
         Set<Position> positionsSet = new HashSet<>(this.grid.keySet());
         List<ColorBlock> allColorBlocks = new ArrayList<>();

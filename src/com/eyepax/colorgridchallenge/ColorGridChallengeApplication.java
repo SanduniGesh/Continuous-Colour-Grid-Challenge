@@ -8,22 +8,28 @@ import java.util.Scanner;
 
 public class ColorGridChallengeApplication {
 
+	/**
+	 * The Main Method of the Application
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Enter WIDTH of grid: ");
-		int width = Integer.parseInt(scanner.nextLine());
-		System.out.println("Enter HEIGHT of grid: ");
-		int height = Integer.parseInt(scanner.nextLine());
+		System.out.println("Enter Width of grid: ");
+		int widthOfGrid = Integer.parseInt(scanner.nextLine());
+		System.out.println("Enter Height of grid: ");
+		int heightOfGrid = Integer.parseInt(scanner.nextLine());
 
 		ColorGridService colorGridService = new ColorGridService();
-		colorGridService.initializeGrid(width, height);
-		System.out.println("color grid............");
+		colorGridService.getInitializedGrid(widthOfGrid, heightOfGrid);
+		System.out.println("");
+		System.out.println("***************** Random Color Grid ******************");
 		colorGridService.printGrid();
 
 		ColorBlock colorBlock = colorGridService.getLargestBlock();
-		System.out.println("color grid............");
 		if (colorBlock != null) {
-			System.out.println("large color block..............");
+			System.out.println("");
+			System.out.println("***************** The Largest Color Grid ******************");
 			colorGridService.printColorBlock(colorBlock);
 		}
 	}
